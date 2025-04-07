@@ -121,8 +121,8 @@ async def run_flow(headline: str):
         flow.state.headline = headline
 
         async def run_flow_logic():
-            # Since our flow methods are now async, we can await kickoff directly.
-            await flow.kickoff()
+            # Run kickoff in a separate thread to avoid asyncio.run() conflicts.
+            await asyncio.to_thread(flow.kickoff)
             await queue.put(None)  # Signal end of stream
 
         asyncio.create_task(run_flow_logic())
