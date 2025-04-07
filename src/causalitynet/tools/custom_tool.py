@@ -208,27 +208,7 @@ def hybrid_search(headline: str) -> str:
             if trigger:
                 expected_output += f"\n   - {trigger}"
     
-    print(expected_output)
-    
     return expected_output
-
-async def hybrid_search_async(headline: str, timeout: float = 10.0) -> str:
-    """
-    Asynchronous wrapper for hybrid_search that offloads the blocking operation
-    to a separate thread and enforces a timeout.
-    """
-    try:
-        result = await asyncio.wait_for(
-            asyncio.to_thread(hybrid_search, headline),
-            timeout=timeout
-        )
-        return result
-    except asyncio.TimeoutError:
-        print("Hybrid search timed out.")
-        return "Hybrid search timed out."
-    except Exception as e:
-        print(f"Hybrid search encountered an error: {e}")
-        return f"Hybrid search error: {e}"
 
 @tool("Search the internet through tavilyAPI")
 def search_tavily(headline: str) -> str:
