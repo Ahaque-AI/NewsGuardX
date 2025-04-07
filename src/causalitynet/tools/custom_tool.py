@@ -1,13 +1,14 @@
 import json
 import os
+import asyncio
 from tavily import TavilyClient
-
 import requests
 from crewai.tools import tool
 from fastembed import TextEmbedding
 from langchain_neo4j import Neo4jGraph
 from dotenv import load_dotenv
 import numpy as np
+
 load_dotenv()
 
 def compute_cosine_similarity(vec1, vec2):
@@ -50,13 +51,11 @@ def format_response(response: dict) -> str:
 
 @tool("Search the internet")
 def search_internet(headline: str) -> str:
-    """Useful to search the internet
-    about a a given topic and return relevant results"""
+    """Useful to search the internet about a given topic and return relevant results"""
     print("Searching the internet...")
     top_result_to_return = 5
     url = "https://google.serper.dev/search"
-    payload = json.dumps(
-        {"q": headline, "num": top_result_to_return, "tbm": "nws"})
+    payload = json.dumps({"q": headline, "num": top_result_to_return, "tbm": "nws"})
     headers = {
         'X-API-KEY': os.environ['SERPER_API_KEY'],
         'content-type': 'application/json'
@@ -64,7 +63,7 @@ def search_internet(headline: str) -> str:
     response = requests.request("POST", url, headers=headers, data=payload)
     # check if there is an organic key
     if 'organic' not in response.json():
-        return "Sorry, I couldn't find anything about that, there could be an error with you serper api key."
+        return "Sorry, I couldn't find anything about that, there could be an error with your serper api key."
     else:
         results = response.json()['organic']
         string = []
@@ -81,8 +80,7 @@ def search_internet(headline: str) -> str:
                     "\n-----------------"
                 ]))
             except KeyError:
-                next # type: ignore
-
+                continue
         return '\n'.join(string)
 
 @tool("Search the graphDB and retrieve similar events using hybrid search")
@@ -213,6 +211,24 @@ def hybrid_search(headline: str) -> str:
     print(expected_output)
     
     return expected_output
+
+async def hybrid_search_async(headline: str, timeout: float = 10.0) -> str:
+    """
+    Asynchronous wrapper for hybrid_search that offloads the blocking operation
+    to a separate thread and enforces a timeout.
+    """
+    try:
+        result = await asyncio.wait_for(
+            asyncio.to_thread(hybrid_search, headline),
+            timeout=timeout
+        )
+        return result
+    except asyncio.TimeoutError:
+        print("Hybrid search timed out.")
+        return "Hybrid search timed out."
+    except Exception as e:
+        print(f"Hybrid search encountered an error: {e}")
+        return f"Hybrid search error: {e}"
 
 @tool("Search the internet through tavilyAPI")
 def search_tavily(headline: str) -> str:
