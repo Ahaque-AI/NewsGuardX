@@ -45,13 +45,13 @@ class CausalFlow(Flow[CausalityNetState]):
     @listen(Headline_Input)
     async def Causal_Tagger_Crew(self):
         self.streamer("Running Causal Tagger...\n")
-        await asyncio.sleep(1.0)
+        await asyncio.sleep(0.3)
         result = await asyncio.to_thread(
             lambda: CausalCrew().crew().kickoff(inputs={"headline": self.state.headline})
         )
         self.state.causal = result.raw
         self.streamer(f"Causal Tagging Result:\n{self.state.causal}\n")
-        await asyncio.sleep(2.0)
+        await asyncio.sleep(0.3)
 
     @listen(and_(News_Detector_Crew, Causal_Tagger_Crew))
     async def Evaluation_Crew(self):
