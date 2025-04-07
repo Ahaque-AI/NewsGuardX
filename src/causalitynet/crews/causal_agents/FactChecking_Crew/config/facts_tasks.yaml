@@ -44,13 +44,28 @@ use_source_credibility:
     Ensure that the evaluation process is thorough and reliable.
     The source credibility agent will assess the reliability and trustworthiness of the news outlet.
   expected_output: >
-    In this task, you should evaluate the credibility of the sources provided by the fact checker agent.
-    
-    Instructions:
-      1. Assess the reliability and trustworthiness of the news outlet using the available criteria.
-      2. Provide a detailed evaluation that includes:
-         - A boolean value indicating whether the source is credible (True if credible, False if not).
-         - A brief explanation of the criteria used for evaluation.
-         - A summary of any potential biases or issues with the source.
-      3. Do not include any imaginary or unverified data.
+    ## Source Credibility Evaluation
+
+    ### Verified Legitimate Sources:
+    - [Source Name 1]: Rating: [High/Medium/Low] credibility
+      - Publication type: [Mainstream news/Academic/Government/etc.]
+      - Notable features: [Fact-checking practices, editorial standards, etc.]
+
+    - [Source Name 2]: Rating: [High/Medium/Low] credibility
+      - Publication type: [Mainstream news/Academic/Government/etc.]
+      - Notable features: [Fact-checking practices, editorial standards, etc.]
+
+    - [Source Name 3]: Rating: [High/Medium/Low] credibility
+      - Publication type: [Mainstream news/Academic/Government/etc.]
+      - Notable features: [Fact-checking practices, editorial standards, etc.]
+
+    ### Headline Verification:
+    - Original headline: "[Exact headline as provided]"
+    - Headline accuracy: [Confirmed/Partially accurate/Not accurate]
+    - Supporting evidence: [Brief summary of how the sources confirm or contradict the headline]
+
+    ### Summary Assessment:
+    Based on evaluation of the credible sources above, this news item is [VERIFIED/PARTIALLY VERIFIED/NOT VERIFIED]. 
+
+    [2-3 sentence explanation of why these sources are considered reliable and how they collectively support or refute the headline's claims.]
   agent: source_credibility_agent
