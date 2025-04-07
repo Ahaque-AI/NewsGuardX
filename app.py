@@ -59,11 +59,10 @@ class CausalFlow(Flow[CausalityNetState]):
         eval_result = EvaluationCrew().crew().kickoff(inputs={
             "verification": self.state.verification,
             "causal": self.state.causal,
-            "headline": self.state.headline
+            "headline": self.state.headline,
+            "sentence": self.state.headline
         })
         self.state.evaluation = eval_result.raw
-        self.streamer(f"Evaluation Result:\n{self.state.evaluation}\n")
-        time.sleep(0.1)
 
     @router(Evaluation_Crew)
     def Route_Back_If_Scores_Low(self):
@@ -88,9 +87,7 @@ class CausalFlow(Flow[CausalityNetState]):
             time.sleep(0.1)
 
         self.state.result = (
-            f"\nFinal outputs:\n"
-            f"Fact Checking: {self.state.verification}\n"
-            f"Causal Tagging: {self.state.causal}\n"
+            f"Final outputs:\nFact Checking: {self.state.verification}\nCausal Tagging: {self.state.causal}\nEvaluation: {self.state.evaluation}"
         )
         self.streamer("Final Evaluation Complete.\n")
         time.sleep(0.1)
@@ -99,13 +96,7 @@ class CausalFlow(Flow[CausalityNetState]):
     def Final_Output(self):
         self.streamer("Returning Final Output...\n")
         time.sleep(0.1)
-        self.streamer(f"Verification: {self.state.verification}\n")
-        time.sleep(0.1)
-        self.streamer(f"Causal: {self.state.causal}\n")
-        time.sleep(0.1)
-        self.streamer(f"Evaluation: {self.state.evaluation}\n")
-        time.sleep(0.1)
-        self.streamer(f"Result: {self.state.result}\n")
+        self.streamer(self.state.result)
         time.sleep(0.1)
 
 @app.post("/run/{headline}")
