@@ -44,13 +44,52 @@ use_tagger:
        - The final output must include all three tags: <cause>, <trigger>, and <effect>.
        - If no explicit causal relationship is found, output "NoTag."
     5. Output Format:
-       - Return a JSON object with two keys: "tagged" and "label".
-       - "tagged" should contain the original sentence with all tags added.
-       - "label" should be set to 1 if a causal relationship is successfully tagged; otherwise, set to 0.
+       - Causal Relationship Analysis:
+        • Sentence: [Original unmodified sentence]
+        • Cause: [Text identified as the cause]
+        • Trigger: [Text identified as the causal trigger/verb]
+        • Effect: [Text identified as the effect]
+        • Label: 1 (Causal relationship present) or 0 (No causal relationship)
+        - Example Output:
+          {
+            "sentence": "[Original unmodified sentence]",
+            "cause": "[Text identified as the cause]",
+            "trigger": "[Text identified as the causal trigger/verb]",
+            "effect": "[Text identified as the effect]",
+            "label": 1 (or 0),
+            "retriever_examples": [List of examples from the retriever agent]
+          }
+        - Ensure the output is in JSON format.
+        - Example JSON:
+          {
+            "sentence": "The rain caused the flood.",
+            "cause": "The rain",
+            "trigger": "caused",
+            "effect": "the flood",
+            "label": 1,
+            "retriever_examples":[
+              {
+                "example_1": "The heavy rain led to flooding in the area.",
+                "cause": "The heavy rain",
+                "trigger": "led to",
+                "effect": "flooding in the area",
+                "label": 1
+              },
+              {
+                  "example_2": "Due to the rain, the river overflowed.",
+                  "cause": "the rain",
+                  "trigger": "Due to",
+                  "effect": "the river overflowed",
+                  "label": 1
+              },
+              //... (up to 20 examples)
+              
+              - Note: You have to include true retrieved examples here from the retriever agent. And these will be 20 examples. Do not spit out any examples from your own.
+          }
+        - The output should be clear and structured, making it easy to identify the cause, trigger, and effect.
        
     Examples:
-    - For a sentence with a clear causal relationship and all tags present, the output should show the tagged sentence and a label of 1.
-    - For a sentence without a clear causal relationship, the output should be "NoTag" with a label of 0.
+    - For a sentence with a clear causal relationship and all tags present, the output should show the clear tagging of cause, trigger, and effect.
     
     Additionally, include examples from the retriever agent.
     
