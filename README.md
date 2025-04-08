@@ -2,24 +2,7 @@
 
 NewsGuardX is a multi-agent AI system built on the powerful [crewAI](https://crewai.com) framework. This project harnesses the collective intelligence of specialized agents to streamline complex workflows—ideal for tasks like news verification, content moderation, and ensuring information integrity.
 
-> **Note:** This project template leverages crewAI’s CausalityNet framework, empowering your agents to collaborate and execute defined tasks efficiently. Tailor your agents, tasks, and logic to meet your unique operational requirements.
-
----
-
-## Table of Contents
-
-- [Overview](#overview)
-- [Features](#features)
-- [Installation](#installation)
-- [Configuration](#configuration)
-- [Usage](#usage)
-- [Project Structure](#project-structure)
-- [Customization](#customization)
-- [Contributing](#contributing)
-- [Support](#support)
-- [License](#license)
-
----
+> **Note:** This project template leverages crewAI's CausalityNet framework, empowering your agents to collaborate and execute defined tasks efficiently. Tailor your agents, tasks, and logic to meet your unique operational requirements.
 
 ## Overview
 
@@ -31,8 +14,6 @@ NewsGuardX is a multi-agent AI system built on the powerful [crewAI](https://cre
 
 This solution is perfect for automating research, streamlining reporting, and implementing robust news verification workflows.
 
----
-
 ## Features
 
 - **Multi-Agent Collaboration:** Divide complex workflows among specialized AI agents.
@@ -40,8 +21,6 @@ This solution is perfect for automating research, streamlining reporting, and im
 - **Seamless Dependency Management:** Leverage [UV](https://docs.astral.sh/uv/) for efficient package handling.
 - **Customizable Workflow:** Define and update agent tasks to adapt to different news analysis scenarios.
 - **Rapid Prototyping:** Quickly deploy and iterate using the provided commands and templates.
-
----
 
 ## Installation
 
@@ -53,42 +32,54 @@ This solution is perfect for automating research, streamlining reporting, and im
 ### Steps
 
 1. **Install UV:**  
-   Run the following command in your terminal:
    ```bash
-   pip install uv 
+   pip install uv
+   ```
+
 2. **Clone the Repository:**
+   ```bash
    git clone https://github.com/Ahaque-AI/NewsGuardX.git
    cd NewsGuardX
+   ```
+
 3. **Install Project Dependencies:**
    ```bash
    pip install -r requirements.txt
+   ```
+
 4. **Environment Variables:**
-   Create or update the .env file with your API keys:
+   Create or update the `.env` file with your API keys:
+   
    You will need 9 Environment Variables:
-   1. GEMINI_API_KEY
-   2. SERPER_API_KEY
-   3. GROQ_API_KEY
-   4. TAVILY_API_KEY
-   5. NVIDIA_NIM_API_KEY
-   6. NEO4J_URI
-   7. NEO4J_USERNAME
-   8. NEO4J_PASSWORD
-   9. AURA_INSTANCEID
+   - `GEMINI_API_KEY`
+   - `SERPER_API_KEY`
+   - `GROQ_API_KEY`
+   - `TAVILY_API_KEY`
+   - `NVIDIA_NIM_API_KEY`
+   - `NEO4J_URI`
+   - `NEO4J_USERNAME`
+   - `NEO4J_PASSWORD`
+   - `AURA_INSTANCEID`
+
 5. **Define Agents:**
-   Edit src/causalitynet/config/agents.yaml to set up your agent profiles, specifying roles, tools, and parameters.
+   Edit `src/causalitynet/config/agents.yaml` to set up your agent profiles, specifying roles, tools, and parameters.
+
 6. **Define Tasks:**
-   Modify src/causalitynet/config/tasks.yaml to outline tasks that the system should execute.
+   Modify `src/causalitynet/config/tasks.yaml` to outline tasks that the system should execute.
+
 7. **Customize Workflow:**
    Update:
+   - `src/causalitynet/crew.py` for custom logic and tool integrations.
+   - `src/causalitynet/main.py` to manage custom inputs and runtime arguments.
 
-   - src/causalitynet/crew.py for custom logic and tool integrations.
-
-   - src/causalitynet/main.py to manage custom inputs and runtime arguments.
 8. **Usage:**
    ```bash
    crewai run
+   ```
 
-### Project Structure
+## Project Structure
+
+```
 NewsGuardX/
 │
 ├── src/
@@ -106,19 +97,24 @@ NewsGuardX/
 ├── pyproject.toml           # Python project configuration
 ├── requirements.txt         # Additional project dependencies
 └── uv.lock                  # UV dependency lock file
+```
 
-### Contributing
+## Contributing
+
 We welcome your contributions to enhance NewsGuardX! To contribute:
+
 1. Fork the repository.
 2. Create a new branch with your feature or fix.
 3. Submit a pull request detailing your changes.
+
 For major contributions, please open an issue first to discuss your ideas.
 
-### Support
+## Support
+
 For support, questions, or feedback:
 
-Documentation:
-Visit the crewAI Documentation for detailed guides and examples.
+### Documentation
+Visit the [crewAI Documentation](https://docs.crewai.com/) for detailed guides and examples.
 
-GitHub Issues:
-Report bugs or request features via the NewsGuardX GitHub Issues.
+### GitHub Issues
+Report bugs or request features via the [NewsGuardX GitHub Issues](https://github.com/Ahaque-AI/NewsGuardX/issues).
