@@ -1,56 +1,124 @@
-# {{crew_name}} Crew
+# NewsGuardX: The AI-Powered News Filtering Crew
 
-Welcome to the {{crew_name}} Crew project, powered by [crewAI](https://crewai.com). This template is designed to help you set up a multi-agent AI system with ease, leveraging the powerful and flexible framework provided by crewAI. Our goal is to enable your agents to collaborate effectively on complex tasks, maximizing their collective intelligence and capabilities.
+NewsGuardX is a multi-agent AI system built on the powerful [crewAI](https://crewai.com) framework. This project harnesses the collective intelligence of specialized agents to streamline complex workflows—ideal for tasks like news verification, content moderation, and ensuring information integrity.
+
+> **Note:** This project template leverages crewAI’s CausalityNet framework, empowering your agents to collaborate and execute defined tasks efficiently. Tailor your agents, tasks, and logic to meet your unique operational requirements.
+
+---
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [Customization](#customization)
+- [Contributing](#contributing)
+- [Support](#support)
+- [License](#license)
+
+---
+
+## Overview
+
+**NewsGuardX** is designed to leverage state-of-the-art AI technologies to monitor, analyze, and manage news content flows. By coordinating multiple specialized agents, the system can:
+
+- **Filter and Verify News Sources:** Employ AI-powered agents to scrutinize news feeds.
+- **Collaborate on Complex Tasks:** Facilitate agent teamwork to verify claims and flag misinformation.
+- **Adapt Dynamically:** Easily adjust roles and logic to address emerging challenges.
+
+This solution is perfect for automating research, streamlining reporting, and implementing robust news verification workflows.
+
+---
+
+## Features
+
+- **Multi-Agent Collaboration:** Divide complex workflows among specialized AI agents.
+- **Easy Configuration:** Edit YAML files to adjust agent roles, tasks, and settings effortlessly.
+- **Seamless Dependency Management:** Leverage [UV](https://docs.astral.sh/uv/) for efficient package handling.
+- **Customizable Workflow:** Define and update agent tasks to adapt to different news analysis scenarios.
+- **Rapid Prototyping:** Quickly deploy and iterate using the provided commands and templates.
+
+---
 
 ## Installation
 
-Ensure you have Python >=3.10 <3.13 installed on your system. This project uses [UV](https://docs.astral.sh/uv/) for dependency management and package handling, offering a seamless setup and execution experience.
+### Prerequisites
 
-First, if you haven't already, install uv:
+- **Python:** Ensure Python version >=3.10 and <3.13 is installed. (Recommended is python=3.10.0)
+- **UV Package Manager:** Used for dependency management and package handling.
 
-```bash
-pip install uv
-```
+### Steps
 
-Next, navigate to your project directory and install the dependencies:
+1. **Install UV:**  
+   Run the following command in your terminal:
+   ```bash
+   pip install uv 
+2. **Clone the Repository:**
+   git clone https://github.com/Ahaque-AI/NewsGuardX.git
+   cd NewsGuardX
+3. **Install Project Dependencies:**
+   ```bash
+   pip install -r requirements.txt
+4. **Environment Variables:**
+   Create or update the .env file with your API keys:
+   You will need 9 Environment Variables:
+   1. GEMINI_API_KEY
+   2. SERPER_API_KEY
+   3. GROQ_API_KEY
+   4. TAVILY_API_KEY
+   5. NVIDIA_NIM_API_KEY
+   6. NEO4J_URI
+   7. NEO4J_USERNAME
+   8. NEO4J_PASSWORD
+   9. AURA_INSTANCEID
+5. **Define Agents:**
+   Edit src/causalitynet/config/agents.yaml to set up your agent profiles, specifying roles, tools, and parameters.
+6. **Define Tasks:**
+   Modify src/causalitynet/config/tasks.yaml to outline tasks that the system should execute.
+7. **Customize Workflow:**
+   Update:
 
-(Optional) Lock the dependencies and install them by using the CLI command:
-```bash
-crewai install
-```
+   - src/causalitynet/crew.py for custom logic and tool integrations.
 
-### Customizing
+   - src/causalitynet/main.py to manage custom inputs and runtime arguments.
+8. **Usage:**
+   ```bash
+   crewai run
 
-**Add your `OPENAI_API_KEY` into the `.env` file**
+### Project Structure
+NewsGuardX/
+│
+├── src/
+│   └── causalitynet/
+│       ├── config/
+│       │   ├── agents.yaml    # Define agent parameters and tools
+│       │   └── tasks.yaml     # List tasks for agent execution
+│       ├── crew.py            # Main logic for agent collaboration
+│       └── main.py            # Entry point for custom input and execution
+│
+├── .env                     # Environment variables (API keys, etc.)
+├── crewai_flow.html         # HTML visualization of the workflow (optional)
+├── docker-compose.yaml      # Docker configuration for containerized execution
+├── dockerfile               # Dockerfile for building the project image
+├── pyproject.toml           # Python project configuration
+├── requirements.txt         # Additional project dependencies
+└── uv.lock                  # UV dependency lock file
 
-- Modify `src/causalitynet/config/agents.yaml` to define your agents
-- Modify `src/causalitynet/config/tasks.yaml` to define your tasks
-- Modify `src/causalitynet/crew.py` to add your own logic, tools and specific args
-- Modify `src/causalitynet/main.py` to add custom inputs for your agents and tasks
+### Contributing
+We welcome your contributions to enhance NewsGuardX! To contribute:
+1. Fork the repository.
+2. Create a new branch with your feature or fix.
+3. Submit a pull request detailing your changes.
+For major contributions, please open an issue first to discuss your ideas.
 
-## Running the Project
+### Support
+For support, questions, or feedback:
 
-To kickstart your flow and begin execution, run this from the root folder of your project:
+Documentation:
+Visit the crewAI Documentation for detailed guides and examples.
 
-```bash
-crewai run
-```
-
-This command initializes the CausalityNet Flow as defined in your configuration.
-
-This example, unmodified, will run the create a `report.md` file with the output of a research on LLMs in the root folder.
-
-## Understanding Your Crew
-
-The CausalityNet Crew is composed of multiple AI agents, each with unique roles, goals, and tools. These agents collaborate on a series of tasks, defined in `config/tasks.yaml`, leveraging their collective skills to achieve complex objectives. The `config/agents.yaml` file outlines the capabilities and configurations of each agent in your crew.
-
-## Support
-
-For support, questions, or feedback regarding the {{crew_name}} Crew or crewAI.
-
-- Visit our [documentation](https://docs.crewai.com)
-- Reach out to us through our [GitHub repository](https://github.com/joaomdmoura/crewai)
-- [Join our Discord](https://discord.com/invite/X4JWnZnxPb)
-- [Chat with our docs](https://chatg.pt/DWjSBZn)
-
-Let's create wonders together with the power and simplicity of crewAI.
+GitHub Issues:
+Report bugs or request features via the NewsGuardX GitHub Issues.
