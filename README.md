@@ -1,4 +1,4 @@
-# NewsGuardX: The AI-Powered News Filtering Crew
+# NewsGuardX: The AI-Powered News Filtering Crewai Comprehensive Workflow
 
 NewsGuardX is a multi-agent AI system built on the powerful [crewAI](https://crewai.com) framework. This project harnesses the collective intelligence of specialized agents to streamline complex workflows—ideal for tasks like news verification, content moderation, and ensuring information integrity.
 
