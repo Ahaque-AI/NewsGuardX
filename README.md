@@ -114,7 +114,7 @@ For major contributions, please open an issue first to discuss your ideas.
 For support, questions, or feedback:
 
 ### Documentation
-Visit the [crewAI Documentation]([https://docs.crewai.com/introduction]) for detailed guides and examples.
+Visit the [crewAI Documentation](https://docs.crewai.com/introduction) for detailed guides and examples.
 
 ### GitHub Issues
 Report bugs or request features via the [NewsGuardX GitHub Issues](https://github.com/Ahaque-AI/NewsGuardX/issues).
